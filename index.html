@@ -35,7 +35,7 @@
       <div class="text-center mb-8">
         <div class="text-6xl mb-4 animate-bounce">🛡️</div>
         <h1 class="text-3xl font-bold text-gray-800 mb-2">סורק וידאו חכם</h1>
-        <p class="text-gray-500">גרסת Client-Only (Vue.js)</p>
+        <p class="text-gray-500">לשמור ולהציל</p>
       </div>
 
       <!-- API Key Section -->
@@ -112,17 +112,10 @@
               class="text-xl font-bold mb-2"
               :class="result.allowed ? 'text-emerald-800' : 'text-red-800'"
             >
-              {{ result.allowed ? 'הסרטון מאושר' : 'הסרטון נחסם' }}
+              {{ result.allowed ? 'לא נמצאה בעיה' : 'נמצאה בעיה בזמן: ' + result.timestamp }}
             </h3>
 
             <div class="text-sm opacity-80 mb-4">{{ result.details }}</div>
-
-            <div
-              v-if="!result.allowed && result.timestamp !== '00:00'"
-              class="inline-block bg-white px-3 py-1 rounded-full text-sm font-mono border shadow-sm"
-            >
-              ⏱️ זמן זיהוי: {{ result.timestamp }}
-            </div>
 
             <div class="mt-4 text-xs text-gray-400">
               Confidence: {{ result.confidence }}
