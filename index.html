@@ -113,14 +113,11 @@
               :class="result.allowed ? 'text-emerald-800' : 'text-red-800'"
             >
               {{ result.allowed ? 'לא נמצאה בעיה' : 'נמצאה בעיה בזמן: ' +
-              result.timestamp }}
+              result.timestamp + ' (בהסתברות של ' + Math.round(result.confidence
+              * 100) + '%)' }}
             </h3>
 
             <div class="text-sm opacity-80 mb-4">{{ result.details }}</div>
-
-            <div class="mt-4 text-xs text-gray-400">
-              Confidence: {{ result.confidence }}
-            </div>
           </div>
         </div>
       </transition>
