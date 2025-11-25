@@ -112,7 +112,8 @@
               class="text-xl font-bold mb-2"
               :class="result.allowed ? 'text-emerald-800' : 'text-red-800'"
             >
-              {{ result.allowed ? 'לא נמצאה בעיה' : 'נמצאה בעיה בזמן: ' + result.timestamp }}
+              {{ result.allowed ? 'לא נמצאה בעיה' : 'נמצאה בעיה בזמן: ' +
+              result.timestamp }}
             </h3>
 
             <div class="text-sm opacity-80 mb-4">{{ result.details }}</div>
@@ -147,7 +148,7 @@ RULES:
 3. Age threshold: Only count if she plausibly appears older than ~3 years.
 4. On first qualifying appearance, record the EXACT earliest timestamp (MM:SS) where she is clearly visible.
 5. Timestamp must be the earliest frame of clear visibility (not later recap).
-6. Provide a concise BLOCK REASON in description when detected (e.g. "Real woman present" / "Real girl visible"). If not detected, explanation like "No real female person".
+6. Provide a concise BLOCK REASON in description in HEBREW (e.g. "אישה נראית בבירור"). If not detected, explanation in HEBREW (e.g. "לא נמצאה דמות נשית").
 7. Keep JSON exactly as specified—no extra properties.
 
 OUTPUT JSON (strict, no extra keys):
@@ -211,12 +212,15 @@ If not detected set timestamp to "00:00".
 
               const data = await response.json();
 
+              console.log("Gemini Raw Response:", data);
+
               // Parse Gemini response
               const candidate = data.candidates?.[0]?.content?.parts?.[0]?.text;
               if (!candidate)
                 throw new Error("No content returned from Gemini");
 
               const parsed = JSON.parse(candidate);
+              console.log("Parsed Content:", parsed);
 
               result.value = {
                 allowed: !parsed.detected,
